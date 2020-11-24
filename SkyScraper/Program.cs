@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using HtmlAgilityPack;
 using System.Linq;
-using System.Globalization;
 using System.Timers;
 
 namespace SkyScraper
 {
     class Program
     {
-        private static HtmlWeb _web = new HtmlWeb();
+        private readonly static HtmlWeb _web = new HtmlWeb();
         private static List<SkyProduct> _products = new List<SkyProduct>
         {
             new SkyProduct
@@ -23,8 +22,8 @@ namespace SkyScraper
         };
         private static Timer _timer;
         private static string _url;
-        private static readonly int _timerDelay = 300000;
-
+        private static readonly int _timerDelay = 300000; //5 mins
+        
         static void Main(string[] args)
         {
 
@@ -98,18 +97,25 @@ namespace SkyScraper
             {
                 if (!_products.Any(i => i.Model == item.Model))
                 {
-                    Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: New item {item.Model} detected with price of {item.Price} \n");
+                    Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: New item {item.Model} detected with price of {item.Price}. \n");
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     var oldItem = _products.FirstOrDefault(i => i.Model == item.Model);
                     if (oldItem.InStock == false && oldItem.InStock != item.InStock)
                     {
+                        Console.Beep();
                         Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: Item {item.Model} in now in stock! \n");
                     }
                     if (oldItem.Price != oldItem.Price)
                     {
-                        Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: Item's {item.Model} price has changed from {oldItem.Price} to {item.Price} \n");
+                        Console.Beep();
+                        Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: Item's {item.Model} price has changed from {oldItem.Price} to {item.Price}. \n");
+                    }
+                    foreach (var missingItem in _products.Except(productList))
+                    {
+                        Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: Item {missingItem.Model} has been removed from the website. \n");
                     }
                 }
             }
