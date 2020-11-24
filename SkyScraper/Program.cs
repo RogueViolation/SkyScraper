@@ -42,7 +42,7 @@ namespace SkyScraper
             Console.ReadLine();
             _timer.Stop();
             _timer.Dispose();
-
+            Console.ResetColor();
             Console.WriteLine("Terminating the application...");
         }
         
@@ -92,16 +92,16 @@ namespace SkyScraper
 
         static void PrintChangedItems(List<SkyProduct> productList)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
             foreach (var item in productList)
             {
                 if (!_products.Any(i => i.Model == item.Model))
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: New item {item.Model} detected with price of {item.Price}. \n");
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     var oldItem = _products.FirstOrDefault(i => i.Model == item.Model);
                     if (oldItem.InStock == false && oldItem.InStock != item.InStock)
                     {
@@ -113,12 +113,17 @@ namespace SkyScraper
                         Console.Beep();
                         Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: Item's {item.Model} price has changed from {oldItem.Price} to {item.Price}. \n");
                     }
-                    foreach (var missingItem in _products.Except(productList))
-                    {
-                        Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: Item {missingItem.Model} has been removed from the website. \n");
-                    }
                 }
             }
+            Console.ForegroundColor = ConsoleColor.Green;
+            foreach (var oldItem in _products)
+            {
+                if (!productList.Any(i => i.Model == oldItem.Model))
+                {
+                    Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: New item {oldItem.Model} detected with price of {oldItem.Price}. \n");
+                }
+            }
+
             Console.ResetColor();
             Console.WriteLine();
         }
