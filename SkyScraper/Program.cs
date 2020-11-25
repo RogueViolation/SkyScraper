@@ -129,7 +129,7 @@ namespace SkyScraper
             }
 
             Console.ResetColor();
-            Console.WriteLine();
+            Console.WriteLine(".");
         }
 
         private static void SetTimer()
