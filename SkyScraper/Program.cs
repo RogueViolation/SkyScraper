@@ -36,12 +36,16 @@ namespace SkyScraper
 
             _url = File.ReadAllText(@"link.txt");
             Console.WriteLine("The application started at {0:HH:mm:ss.fff}", DateTime.Now);
+            Console.WriteLine("\nPress the Enter key to exit the application...\n");
+
+            GetItemsFromHTML(_url);
             SetTimer();
 
-            Console.WriteLine("\nPress the Enter key to exit the application...\n");
             Console.ReadLine();
+
             _timer.Stop();
             _timer.Dispose();
+
             Console.ResetColor();
             Console.WriteLine("Terminating the application...");
         }
@@ -51,7 +55,7 @@ namespace SkyScraper
             return _web.Load(url).DocumentNode;
         }
 
-        static void GetItemsFromHTML(string url)
+        static List<SkyProduct> GetItemsFromHTML(string url)
         {
             var productList = new List<SkyProduct>();
             var html = GetPageContents(url);
@@ -66,8 +70,8 @@ namespace SkyScraper
                     !nNode.Attributes["class"].Value.Contains("nostock")
                     ));
             }
-                PrintChangedItems(productList);
-                _products = productList;
+            _products = productList;
+            return productList;
         }
 
         static SkyProduct GetProductInfo(IEnumerable<HtmlNode> htmlNodes, bool inStock)
@@ -138,7 +142,7 @@ namespace SkyScraper
 
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            GetItemsFromHTML(_url);
+            PrintChangedItems(GetItemsFromHTML(_url));
         }
     }
 
