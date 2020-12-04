@@ -35,6 +35,7 @@ namespace SkyScraper
             }
 
             _url = File.ReadAllText(@"link.txt");
+            Console.WriteLine("SkyScraper v0.1");
             Console.WriteLine("The application started at {0:HH:mm:ss.fff}", DateTime.Now);
             Console.WriteLine("\nPress the Enter key to exit the application...\n");
 
