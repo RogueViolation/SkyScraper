@@ -22,7 +22,7 @@ namespace SkyScraper
         };
         private static Timer _timer;
         private static string _url;
-        private static readonly int _timerDelay = 300000; //5 mins
+        private static readonly int _timerDelay = 10000; //5 mins
         
         static void Main(string[] args)
         {
@@ -70,7 +70,7 @@ namespace SkyScraper
                     !nNode.Attributes["class"].Value.Contains("nostock")
                     ));
             }
-            _products = productList;
+            _products = productList.Select(x => x.GetCopy()).ToList();
             return productList;
         }
 
@@ -112,7 +112,7 @@ namespace SkyScraper
                         Console.Beep();
                         Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: Item {item.Model} in now in stock! \n");
                     }
-                    if (oldItem.Price != oldItem.Price)
+                    if (oldItem.Price != item.Price)
                     {
                         Console.Beep();
                         Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: Item's {item.Model} price has changed from {oldItem.Price} to {item.Price}. \n");
@@ -152,5 +152,16 @@ namespace SkyScraper
         public string Model { get; set; }
         public string Name { get; set; }
         public string Price { get; set; }
+
+        public SkyProduct GetCopy()
+        {
+            return new SkyProduct
+            {
+                InStock = InStock,
+                Model = Model,
+                Name = Name,
+                Price = Price
+            };
+        }
     }
 }
