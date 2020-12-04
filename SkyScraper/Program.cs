@@ -22,7 +22,7 @@ namespace SkyScraper
         };
         private static Timer _timer;
         private static string _url;
-        private static readonly int _timerDelay = 10000; //5 mins
+        private static readonly int _timerDelay = 300000; //5 mins
         
         static void Main(string[] args)
         {
