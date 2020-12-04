@@ -97,6 +97,7 @@ namespace SkyScraper
 
         static void PrintChangedItems(List<SkyProduct> productList)
         {
+            Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff}: Checking for changes. \n");
             foreach (var item in productList)
             {
                 if (!_products.Any(i => i.Model == item.Model))
