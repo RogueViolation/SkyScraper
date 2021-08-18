@@ -22,7 +22,7 @@ namespace SkyScraper
             }
 
             _url = File.ReadAllText($"userdata/link.txt");
-            Console.WriteLine("SkyScraper v0.1");
+            Console.WriteLine("SkyScraper v0.2");
             Console.WriteLine($"Application started at {DateTime.Now:HH:mm:ss.fff}");
             Console.WriteLine("\nPress the Enter key to exit the application...\n");
 
