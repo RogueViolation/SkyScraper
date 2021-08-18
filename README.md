@@ -8,3 +8,4 @@ Just get some stock pls come on. It really shows that I am not commited to press
 * Download the [latest Release](https://github.com/RogueViolation/SkyScraper/releases/tag/v0.2).
 * Extract the Release
 * Go to the 'userdata' folder and in the link.txt paste in the link from a Skytech search result page
+* Launch SkyScraper.exe
