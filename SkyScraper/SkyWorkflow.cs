@@ -11,7 +11,8 @@ namespace SkyScraper
         private static List<SkyProduct> _products = new() { SkyProduct.Default() };
         private static Timer _timer;
         private static string _url;
-        private static readonly int _timerDelay = 300000; //5 mins
+        private static readonly int _timerDelay = int.Parse(ConfigurationReader.GetSection("timerDelay")); //5 mins
+        private static readonly string _version = ConfigurationReader.GetSection("version");
         public static void Start()
         {
             if (!File.Exists($"userdata/link.txt"))
@@ -22,7 +23,7 @@ namespace SkyScraper
             }
 
             _url = File.ReadAllText($"userdata/link.txt");
-            Console.WriteLine("SkyScraper v0.2");
+            Console.WriteLine($"SkyScraper {_version}");
             Console.WriteLine($"Application started at {DateTime.Now:HH:mm:ss.fff}");
             Console.WriteLine("\nPress the Enter key to exit the application...\n");
 
