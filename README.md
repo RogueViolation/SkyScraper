@@ -3,7 +3,7 @@ Since Lithuanian stocks of new 30 series NVidia GPUs were non-existant I decided
 
 Just get some stock pls come on. It really shows that I am not commited to pressing F5 every once in a while on a website.
 
-###Right now the app can only grab a 100 products in one call because the website needs a cookie to get more than a 100 and I am working on it
+### Right now the app can only grab a 100 products in one call because the website needs a cookie to get more than a 100 and I am working on it
 
 ## How to use
 
