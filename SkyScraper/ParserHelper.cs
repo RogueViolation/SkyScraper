@@ -91,7 +91,8 @@ namespace SkyScraper
             }
             catch (Exception)
             {
-                throw;
+                Console.WriteLine("Error fetching file.");
+                return new List<SkyProduct> { SkyProduct.Default() };
             }
         }
     }
