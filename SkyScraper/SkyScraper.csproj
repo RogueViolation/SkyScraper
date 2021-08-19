@@ -3,6 +3,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>Ignas Ro</Authors>
+    <Version>0.2</Version>
+    <Company />
   </PropertyGroup>
 
   <ItemGroup>
