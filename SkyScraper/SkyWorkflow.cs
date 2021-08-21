@@ -6,7 +6,7 @@ using SkyScraper.Models;
 
 namespace SkyScraper
 {
-    class SkyWorkflow
+    public class SkyWorkflow
     {
         private static List<SkyProduct> _products = new() { SkyProduct.Default() };
         private static Timer _timer;
