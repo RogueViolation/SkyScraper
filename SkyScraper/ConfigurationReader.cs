@@ -1,10 +1,11 @@
 ﻿using System.Configuration;
+using SkyScraper.Interface;
 
 namespace SkyScraper
 {
-    public static class ConfigurationReader
+    public class ConfigurationReader: IConfigurationReader
     {
-        public static string GetSection(string section)
+        public string GetSection(string section)
         {
             var reader = new AppSettingsReader();
             return reader.GetValue(section, typeof(string)).ToString();

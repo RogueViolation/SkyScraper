@@ -1,10 +1,16 @@
-﻿namespace SkyScraper.CLI
+﻿using SkyScraper.Interface;
+
+namespace SkyScraper.CLI
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            SkyWorkflow.Start();
+            IPrinter printer = new Printer();
+            IConfigurationReader configurationReader = new ConfigurationReader();
+            ISkyParser skyParser = new SkyParser();
+
+            new SkyWorkflow(configurationReader, printer, skyParser).Start();
         }
     }
 }

@@ -9,4 +9,13 @@
     <ProjectReference Include="..\SkyScraper\SkyScraper.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="userdata\App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="userdata\link.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

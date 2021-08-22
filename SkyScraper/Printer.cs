@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using SkyScraper.Models;
+using SkyScraper.Interface;
 
 namespace SkyScraper
 {
-    public static class Printer
+    public class Printer : IPrinter
     {
-        public static bool PrintChangedItems(List<SkyProduct> productList, List<SkyProduct> productListOld)
+        public bool PrintChangedItems(List<SkyProduct> productList, List<SkyProduct> productListOld)
         {
             bool anyChanges = false;
             foreach (var item in productList)
