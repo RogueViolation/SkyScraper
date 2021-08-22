@@ -4,11 +4,12 @@ using System.IO;
 using System.Linq;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
+using SkyScraper.Interface;
 using SkyScraper.Models;
 
 namespace SkyScraper
 {
-    public static class ParserHelper
+    public class SkyParser : ISkyParser
     {
         private readonly static HtmlWeb _web = new();
         static HtmlNode GetPageContentsToObject(string url)
@@ -17,7 +18,7 @@ namespace SkyScraper
             return _web.Load(url).DocumentNode;
         }
 
-        public static List<SkyProduct> GetItemsFromHTML(string url)
+        public List<SkyProduct> GetItemsFromHTML(string url)
         {
             var productList = new List<SkyProduct>();
             var html = GetPageContentsToObject(url);
@@ -38,7 +39,7 @@ namespace SkyScraper
             return productList;
         }
 
-        static SkyProduct GetProductInfo(IEnumerable<HtmlNode> htmlNodes, bool inStock)
+        private static SkyProduct GetProductInfo(IEnumerable<HtmlNode> htmlNodes, bool inStock)
         {
             var priceString = htmlNodes.ElementAtOrDefault(4).InnerText.Trim().Replace(" ", string.Empty).Replace("€", "EUR");
 
@@ -66,7 +67,7 @@ namespace SkyScraper
             serializer.Serialize(file, obj);
         }
 
-        public static List<SkyProduct> FetchStockFromFile(string url)
+        public List<SkyProduct> FetchStockFromFile(string url)
         {
             try
             {
